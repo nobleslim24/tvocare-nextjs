@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Eye, Target, GraduationCap, Heart, Sparkles, Users, InfoCheck, Info } from "lucide-react";
+import { Eye, Target, GraduationCap, Heart, Sparkles, Users, Info } from "lucide-react";
 
 export default function About() {
   const values = [

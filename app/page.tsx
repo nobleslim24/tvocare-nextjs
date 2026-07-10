@@ -83,7 +83,7 @@ export default function Home() {
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <span className="text-xs font-display font-semibold tracking-widest text-gold-500 uppercase block mb-3">Family-Run Care Provider</span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1] mb-6">Welcome to <br/><span class="gold-gradient-text font-extrabold">TVO CARE</span> Limited</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1] mb-6">Welcome to <br/><span className="gold-gradient-text font-extrabold">TVO CARE</span> Limited</h2>
                 <div className="about-divider h-[2px] w-32 bg-gradient-to-r from-gold-500 to-transparent"></div>
               </div>
               <p className="text-base sm:text-lg text-gray-300 font-sans leading-relaxed">At TVO Care, we believe that everyone deserves to live a fulfilling life, regardless of the challenges they face. As a family-run healthcare provider, we specialize in high-quality domiciliary care for adults with mental health needs, physical disabilities, and sensory impairments.</p>
@@ -136,7 +136,7 @@ export default function Home() {
             <div className="lg:col-span-5 lg:sticky lg:top-[120px] lg:h-fit space-y-6">
               <div className="space-y-3">
                 <span className="text-xs font-display font-semibold tracking-widest text-gold-500 uppercase block">Our Comprehensive Care Services</span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1]">Support Built <br/><span class="gold-gradient-text font-extrabold">Around You</span></h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1]">Support Built <br/><span className="gold-gradient-text font-extrabold">Around You</span></h2>
               </div>
               <p className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed">At TVO Care Limited, we treat our service users like family. Explore our range of personalized support services delivered in the comfort of your home.</p>
               <div className="pt-4">
@@ -187,9 +187,9 @@ export default function Home() {
                     <span className="text-[10px] font-display font-bold uppercase tracking-wider text-gold-500/60 block mb-3">Key Service Features:</span>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Tenancy & finance management</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Daily wellbeing check-ins</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Daily wellbeing check-ins</li>
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Flexible support plans</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Empowerment-focused care</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Empowerment-focused care</li>
                     </ul>
                   </div>
                 </div>
@@ -214,9 +214,9 @@ export default function Home() {
                     <span className="text-[10px] font-display font-bold uppercase tracking-wider text-gold-500/60 block mb-3">Key Service Features:</span>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Light housekeeping & laundry</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Meal prep & cooking support</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Meal prep & cooking support</li>
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Grocery shopping & errands</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Stress-free home management</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Stress-free home management</li>
                     </ul>
                   </div>
                 </div>
@@ -241,9 +241,9 @@ export default function Home() {
                     <span className="text-[10px] font-display font-bold uppercase tracking-wider text-gold-500/60 block mb-3">Key Service Features:</span>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Healthcare visit accompaniment</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Social outings & support</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Social outings & support</li>
                       <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Safe travel accompaniment</li>
-                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Engaged companionship</li>
+                      <li className="flex items-center gap-2.5 text-xs text-gray-400 font-medium"><span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>Engaged companionship</li>
                     </ul>
                   </div>
                 </div>
@@ -437,7 +437,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-xs font-display font-semibold tracking-widest text-gold-500 uppercase block mb-3">Why Choose TVO CARE Limited?</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1] mb-6">Expertise you can <span class="gold-gradient-text font-extrabold">trust</span>.<br/>Compassion you can <span class="gold-gradient-text font-extrabold">feel</span>.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight leading-[1.1] mb-6">Expertise you can <span className="gold-gradient-text font-extrabold">trust</span>.<br/>Compassion you can <span className="gold-gradient-text font-extrabold">feel</span>.</h2>
             <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto"></div>
           </div>
           
