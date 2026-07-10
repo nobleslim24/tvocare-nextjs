@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #080808;
+    --foreground: #e5e7eb;
+  }
+  
+  html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #080808;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400;
+  }
+  .bg-gradient-gold {
+    @apply bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400;
+  }
+  .glass-card {
+    @apply bg-black-rich/80 backdrop-blur-md border border-black-border;
+  }
+  
+  /* Text Gradients */
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #dbaf4b 0%, #d4af37 50%, #f7e0a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom styles for service cards */
+  .service-sticky-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .service-sticky-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Custom timeline SVG lines and animations */
+  .timeline-path {
+    stroke-dasharray: 8 6;
+  }
+
+  /* Bento card hover effect */
+  .bento-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bento-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  /* Testimonial slider */
+  .testimonial-slide {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+}
