@@ -1,5 +1,10 @@
+import { NextResponse } from "next/server";
 
-received from booking form:", data);
+export async function POST(request: Request) {
+  try {
+    const data = await request.json();
+
+    console.log("Data received from booking form:", data);
 
     const response = await fetch("https://api.staticforms.dev/submit", {
       method: "POST",
