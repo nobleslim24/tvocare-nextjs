@@ -84,19 +84,10 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
   return (
     <>
       {/* Subpage Banner */}
-      <section className="relative min-h-[35vh] bg-black-pure flex flex-col justify-end overflow-hidden border-b border-black-border z-10 py-16">
-        <div className="absolute inset-0 z-0">
-          <div className="relative w-full h-full">
-            <Image 
-              alt={`TVO Care ${service.title} Banner`}
-              className="object-cover w-full h-full opacity-25 object-center" 
-              src="/hero-care.jpg" 
-              fill
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black-pure to-black-pure/50"></div>
-          </div>
-        </div>
+      <section className="relative min-h-[35vh] bg-gradient-to-br from-black-pure via-black-rich to-gold-950/15 flex flex-col justify-end overflow-hidden border-b border-black-border z-10 py-16">
+        <div className="absolute inset-0 pointer-events-none opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #d4af37 1px, transparent 0)", backgroundSize: "32px 32px" }}></div>
+        <div className="absolute left-[-10%] top-[10%] w-[45%] h-[45%] rounded-full bg-gold-900/5 blur-[120px] pointer-events-none"></div>
+        <div className="absolute right-[5%] bottom-[-5%] w-[30%] h-[30%] rounded-full bg-gold-900/5 blur-[100px] pointer-events-none"></div>
         <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-xs font-display font-semibold uppercase tracking-wider text-gray-500 mb-4">

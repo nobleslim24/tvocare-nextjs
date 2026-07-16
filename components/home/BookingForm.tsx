@@ -60,11 +60,41 @@ export function BookingForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Validate step 4 if any required (notes is optional so it's always valid)
-    console.log("Form Submitted:", { ...formData, relationship });
-    setIsSubmitted(true);
+
+    try {
+      const response = await fetch("/api/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "New TVO Care Assessment Request",
+          relationship,
+          name: formData.contactName,
+          email: formData.contactEmail,
+          phone: formData.contactPhone,
+          message: `Recipient: ${formData.recipientName} (Age: ${formData.recipientAge})
+Postcode: ${formData.postcode}
+Relationship: ${relationship}
+Care Type: ${formData.careType}
+Urgency: ${formData.urgency}
+Notes: ${formData.notes}`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setIsSubmitted(true);
+      } else {
+        alert("Your assessment request could not be sent. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An unexpected error occurred. Please try again later.");
+    }
   };
 
   if (isSubmitted) {

@@ -18,11 +18,41 @@ export function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Contact Form Submitted:", formData);
-    setIsSubmitted(true);
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+       
+        subject: "New Contact Form Enquiry",
+
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        messageSubject: formData.subject,
+        message: formData.message,
+      }),
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if (response.ok && result.success) {
+      setIsSubmitted(true);
+    } else {
+      alert("Your message could not be sent. Please try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("An unexpected error occurred. Please try again later.");
+  }
+};
 
   if (isSubmitted) {
     return (
