@@ -1,10 +1,24 @@
 import { NextResponse } from "next/server";
+import { contactSchema } from "../../../lib/contactSchema";
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
 
-    console.log("Data received from form:", data);
+    const validation = contactSchema.safeParse(data);
+
+    if (!validation.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Please check your form details.",
+          errors: validation.error.flatten().fieldErrors,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
     const response = await fetch("https://api.staticforms.dev/submit", {
       method: "POST",
@@ -13,13 +27,11 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         apiKey: process.env.STATICFORMS_API_KEY,
-        ...data,
+        ...validation.data,
       }),
     });
 
     const result = await response.json();
-
-    console.log("StaticForms response:", result);
 
     return NextResponse.json(result, {
       status: response.status,

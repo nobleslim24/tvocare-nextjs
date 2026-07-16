@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import { CheckCircle } from "lucide-react";
+import { contactSchema, type ContactFormValues } from "../lib/contactSchema";
+
+type FormErrors = Partial<Record<keyof ContactFormValues, string>>;
 
 export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [formData, setFormData] = useState<ContactFormValues>({
     name: "",
     email: "",
     phone: "",
@@ -16,43 +21,50 @@ export function ContactForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-       
-        subject: "New Contact Form Enquiry",
+    const validation = contactSchema.safeParse(formData);
 
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        messageSubject: formData.subject,
-        message: formData.message,
-      }),
-    });
+    if (!validation.success) {
+      const fieldErrors = validation.error.flatten().fieldErrors;
+      const nextErrors = Object.fromEntries(
+        Object.entries(fieldErrors).map(([key, value]) => [key, value?.[0]])
+      ) as FormErrors;
 
-    const result = await response.json();
-
-    console.log(result);
-
-    if (response.ok && result.success) {
-      setIsSubmitted(true);
-    } else {
-      alert("Your message could not be sent. Please try again.");
+      setErrors(nextErrors);
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert("An unexpected error occurred. Please try again later.");
-  }
-};
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validation.data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setIsSubmitted(true);
+        setErrors({});
+      } else {
+        alert(result.message || "Your message could not be sent. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An unexpected error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isSubmitted) {
     return (
@@ -88,9 +100,10 @@ export function ContactForm() {
           required 
           value={formData.name}
           onChange={handleChange}
-          className="w-full bg-black-pure border border-black-border focus:border-gold-500/50 rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors" 
+          className={`w-full bg-black-pure border rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors ${errors.name ? "border-red-500" : "border-black-border focus:border-gold-500/50"}`} 
           placeholder="e.g. Sarah Jenkins" 
         />
+        {errors.name && <p className="mt-2 text-xs text-red-400">{errors.name}</p>}
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -103,9 +116,10 @@ export function ContactForm() {
             required 
             value={formData.email}
             onChange={handleChange}
-            className="w-full bg-black-pure border border-black-border focus:border-gold-500/50 rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors" 
+            className={`w-full bg-black-pure border rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors ${errors.email ? "border-red-500" : "border-black-border focus:border-gold-500/50"}`} 
             placeholder="name@domain.com" 
           />
+          {errors.email && <p className="mt-2 text-xs text-red-400">{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="contact-phone" className="block text-xs font-display font-bold uppercase tracking-wider text-gray-400 mb-2">Phone Number</label>
@@ -116,9 +130,10 @@ export function ContactForm() {
             required 
             value={formData.phone}
             onChange={handleChange}
-            className="w-full bg-black-pure border border-black-border focus:border-gold-500/50 rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors" 
+            className={`w-full bg-black-pure border rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors ${errors.phone ? "border-red-500" : "border-black-border focus:border-gold-500/50"}`} 
             placeholder="e.g. +44 7123 456789" 
           />
+          {errors.phone && <p className="mt-2 text-xs text-red-400">{errors.phone}</p>}
         </div>
       </div>
       
@@ -131,9 +146,10 @@ export function ContactForm() {
           required 
           value={formData.subject}
           onChange={handleChange}
-          className="w-full bg-black-pure border border-black-border focus:border-gold-500/50 rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors" 
+          className={`w-full bg-black-pure border rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors ${errors.subject ? "border-red-500" : "border-black-border focus:border-gold-500/50"}`} 
           placeholder="How can we help you?" 
         />
+        {errors.subject && <p className="mt-2 text-xs text-red-400">{errors.subject}</p>}
       </div>
       
       <div>
@@ -145,13 +161,14 @@ export function ContactForm() {
           required 
           value={formData.message}
           onChange={handleChange}
-          className="w-full bg-black-pure border border-black-border focus:border-gold-500/50 rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors resize-none" 
+          className={`w-full bg-black-pure border rounded-lg py-3 px-4 text-sm text-white focus:outline-none transition-colors resize-none ${errors.message ? "border-red-500" : "border-black-border focus:border-gold-500/50"}`} 
           placeholder="Write your message here..."
         ></textarea>
+        {errors.message && <p className="mt-2 text-xs text-red-400">{errors.message}</p>}
       </div>
       
-      <button type="submit" className="w-full py-4 bg-gold-500 hover:bg-gold-400 text-black-pure text-xs font-display font-bold uppercase tracking-widest rounded-full transition-all">
-        Send Message
+      <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-gold-500 hover:bg-gold-400 disabled:opacity-70 disabled:cursor-not-allowed text-black-pure text-xs font-display font-bold uppercase tracking-widest rounded-full transition-all">
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );
