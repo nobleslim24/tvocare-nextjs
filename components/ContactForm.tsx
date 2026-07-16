@@ -22,13 +22,13 @@ export function ContactForm() {
   e.preventDefault();
 
   try {
-    const response = await fetch("/api/contact", {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-       
+        access_key: "9d982fb0-4394-40e1-9da4-90f3fd68fb7a",
         subject: "New Contact Form Enquiry",
 
         name: formData.name,
