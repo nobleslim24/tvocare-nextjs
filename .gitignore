@@ -82,8 +82,10 @@ web_modules/
 # next.js
 out/
 
-# production
-build
+# build outputs
+.next/
+out/
+build/
 
 # OS files
 .DS_Store

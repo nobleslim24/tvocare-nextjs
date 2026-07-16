@@ -6,26 +6,26 @@ export async function POST(request: Request) {
 
     console.log("Data received from form:", data);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
+    const response = await fetch("https://api.staticforms.dev/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_ACCESS_KEY,
+        apiKey: process.env.STATICFORMS_API_KEY,
         ...data,
       }),
     });
 
     const result = await response.json();
 
-    console.log("Web3Forms response:", result);
+    console.log("StaticForms response:", result);
 
     return NextResponse.json(result, {
       status: response.status,
     });
   } catch (error) {
-    console.error("Web3Forms error:", error);
+    console.error("StaticForms error:", error);
 
     return NextResponse.json(
       {

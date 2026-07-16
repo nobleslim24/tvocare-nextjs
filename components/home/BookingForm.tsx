@@ -64,13 +64,12 @@ export function BookingForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "9d982fb0-4394-40e1-9da4-90f3fd68fb7a",
           subject: "New TVO Care Assessment Request",
           relationship,
           name: formData.contactName,
